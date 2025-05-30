@@ -1,0 +1,25 @@
+name: HackerNews Bot
+
+on:
+  schedule:
+    - cron: "0 22 * * *" # 8am AEST
+  workflow_dispatch:
+
+jobs:
+  send-hn-posts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Execute HN Bot
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL_NEWS }}
+          NODE_NO_WARNINGS: 1
+        run: node --experimental-strip-types bots/bot-hn.ts
