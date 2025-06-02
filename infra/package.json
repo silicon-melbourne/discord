@@ -3,9 +3,10 @@
   "main": "src/index.ts",
   "devDependencies": {
     "@discordjs/rest": "^2.5.0",
-    "@types/node": "^18",
+    "@types/node": "^18.19.110",
     "discord-api-types": "^0.38.9",
     "discord.js": "^14.19.3",
+    "tsx": "^4.19.4",
     "typescript": "^5.0.0"
   },
   "dependencies": {
