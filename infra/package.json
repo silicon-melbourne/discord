@@ -3,14 +3,18 @@
   "main": "src/index.ts",
   "devDependencies": {
     "@discordjs/rest": "^2.5.0",
-    "@types/node": "^18.19.110",
-    "discord-api-types": "^0.38.9",
+    "@types/node": "^24.0.10",
+    "discord-api-types": "^0.38.15",
     "discord.js": "^14.19.3",
     "tsx": "^4.19.4",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "@pulumi/pulumi": "^3.113.0",
     "snowtransfer": "^0.14.2"
+  },
+  "scripts": {
+    "test": "vitest"
   }
 }

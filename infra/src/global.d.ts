@@ -13,7 +13,11 @@ type _MergeIfPresent<U, K> = Omit<U, Extract<keyof K, keyof U>> &
  * Distributes over a union and merges in K,
  * but only where the member already defines that key.
  */
-export type DistributiveMerge<
-  T,
-  K extends { [k in keyof T]?: any }
-> = T extends any ? Prettify<_MergeIfPresent<T, K>> : never;
+type DistributiveMerge<T, K extends { [k in keyof T]?: any }> = T extends any
+  ? Prettify<_MergeIfPresent<T, K>>
+  : never;
+
+/**
+ * Loosely autocomplete a union of string-like values.
+ */
+type LooseAutocomplete<T extends string> = T | Omit<string, T>;

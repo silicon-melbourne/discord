@@ -4,10 +4,12 @@ import { DynamicResource } from "../DynamicResource";
 import { APIGuild, RESTPatchAPIGuildJSONBody } from "discord-api-types/v10";
 
 type Inputs = RESTPatchAPIGuildJSONBody;
-
 type Outputs = APIGuild;
 
-class GuildProvider extends ResourceProvider {
+class GuildProvider extends ResourceProvider<Inputs, Outputs> {
+  compareKeys: (keyof Inputs & keyof Outputs)[] = ["name", "icon"];
+  stableKeys: (keyof Inputs | keyof Outputs)[] = ["id"];
+
   async create(inputs: Inputs): Promise<pulumi.dynamic.CreateResult<Outputs>> {
     const guild = await this.client?.guild.getGuild(this.serverId);
 
@@ -18,23 +20,6 @@ class GuildProvider extends ResourceProvider {
     return {
       id: this.serverId,
       outs: guildToOwn,
-    };
-  }
-
-  async diff(
-    _id: string,
-    olds: any,
-    news: any
-  ): Promise<pulumi.dynamic.DiffResult> {
-    const changes = Object.keys(news)
-      .filter((k) => k !== "__provider")
-      .some((k) => news[k] !== olds[k]);
-
-    return {
-      changes,
-      replaces: [],
-      stables: ["serverId"],
-      deleteBeforeReplace: false,
     };
   }
 
@@ -60,10 +45,6 @@ class GuildProvider extends ResourceProvider {
     }
 
     return { outs: olds };
-  }
-
-  async delete(id: string, props: Outputs): Promise<void> {
-    // TODO: Probably don't really want this
   }
 }
 

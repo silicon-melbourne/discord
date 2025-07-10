@@ -1,4 +1,5 @@
 export { Guild } from "./Guild";
-export { GuildChannel } from "./GuildChannel";
+export { GuildTextChannel } from "./GuildTextChannel";
+export { GuildForumChannel } from "./GuildForumChannel";
 
 export { ChannelType } from "discord-api-types/v10";

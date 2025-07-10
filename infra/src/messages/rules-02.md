@@ -1,0 +1,3 @@
+4. **Protect privacy & confidentiality**
+  - Do not share personal information (your own or others’) or proprietary/confidential work content (this should all be covered under your policies with where you work, but it never hurts to be reminded).
+  - Do not share conversations from this discord externally without the explicit approval from all participants in said conversation. Anyone found doing this will be immediately banned. This discord should be treated like a public space — if you wouldn't say it publicly, best to err on the side of caution and not say it at all.
