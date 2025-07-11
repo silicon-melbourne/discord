@@ -43,17 +43,16 @@ function formatStoryForDiscord(story: HackerNewsStory): string {
   const author = story.by ?? "Unknown";
 
   return `**[${title}](<${url}>)**
-[${author}](<https://news.ycombinator.com/user?id=${author}>) | ⬆️ ${score} points | 💬 [${comments} comments](<https://news.ycombinator.com/item?id=${story.id}>)
-`;
+-# [${author}](<https://news.ycombinator.com/user?id=${author}>) | ${score} points | [${comments} comments](<https://news.ycombinator.com/item?id=${story.id}>)`;
 }
 
 async function main(): Promise<void> {
   try {
-    const stories = await getTopStories(5);
+    const stories = await getTopStories(3);
 
     const message = stories.reduce((msg, story) => {
-      return msg + formatStoryForDiscord(story) + "\n";
-    }, "# 📰 Top Hacker News Stories\n\n");
+      return msg + formatStoryForDiscord(story) + "\n\n";
+    }, "-# **Top Hacker News Stories**\n");
 
     console.log("Sending to Discord...");
     await sendToDiscord(message);

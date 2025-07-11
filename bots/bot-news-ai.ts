@@ -6,12 +6,14 @@ async function main() {
     q: '("software engineers" OR developers OR openai) AND ("artificial intelligence" OR AI)',
     category: "technology",
     country: "au,us",
-    size: 5,
+    size: 3,
   });
 
   const message = news.reduce((msg, item) => {
-    return msg + `- [${item.title}](<${item.link}>) | ${item.source_name}\n`;
-  }, "## 📰 Headlines\n\n");
+    return (
+      msg + `**[${item.title}](<${item.link}>)**\n-# ${item.source_name}\n`
+    );
+  }, "### AI& LLM Headlines\n\n");
 
   sendToDiscord(message);
 }
