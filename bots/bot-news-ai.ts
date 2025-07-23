@@ -1,6 +1,9 @@
 import { getNews } from "./utils/news.ts";
 import { sendToDiscord } from "./utils/sendToDiscord.ts";
 
+const fileSourceCodeUrl =
+  "https://github.com/silicon-melbourne/discord/blob/main/bots/bot-news-ai.ts";
+
 async function main() {
   const news = await getNews({
     q: '("software engineers" OR developers OR openai) AND ("artificial intelligence" OR AI)',
@@ -13,9 +16,11 @@ async function main() {
     return (
       msg + `**[${item.title}](<${item.link}>)**\n-# ${item.source_name}\n`
     );
-  }, "### AI& LLM Headlines\n\n");
+  }, "-# **Top AI Headlines**\n");
 
-  sendToDiscord(message);
+  sendToDiscord(
+    message + `-# (Source code for this bot is [here](<${fileSourceCodeUrl}>))`
+  );
 }
 
 main();

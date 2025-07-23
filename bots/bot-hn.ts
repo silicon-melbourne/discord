@@ -1,6 +1,9 @@
 import { sendToDiscord } from "./utils/sendToDiscord.ts";
 import { httpRequest } from "./utils/httpRequest.ts";
 
+const fileSourceCodeUrl =
+  "https://github.com/silicon-melbourne/discord/blob/main/bots/bot-hn.ts";
+
 interface HackerNewsStory {
   id: number;
   title?: string;
@@ -51,11 +54,13 @@ async function main(): Promise<void> {
     const stories = await getTopStories(3);
 
     const message = stories.reduce((msg, story) => {
-      return msg + formatStoryForDiscord(story) + "\n\n";
+      return msg + formatStoryForDiscord(story) + "\n";
     }, "-# **Top Hacker News Stories**\n");
 
     console.log("Sending to Discord...");
-    await sendToDiscord(message);
+    await sendToDiscord(
+      message + `-# (Source code for this bot is [here](${fileSourceCodeUrl}))`
+    );
     console.log("Successfully sent to Discord!");
   } catch (error) {
     console.error(error);
